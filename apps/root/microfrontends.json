@@ -13,6 +13,13 @@
         }
       ]
     },
+    "microfrontends-nextjs-pages-federation-login": {
+      "routing": [
+        {
+          "paths": ["/_login/:path*"]
+        }
+      ]
+    },
     "microfrontends-nextjs-pages-federation-navigation": {
       "routing": [
         {

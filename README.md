@@ -4,11 +4,15 @@
   <img src="https://assets.vercel.com/image/upload/v1689795055/docs-assets/static/docs/microfrontends/mfe-banner-light.png" alt="hero banner">
 </picture>
 
-# @vercel/microfrontends Module Federation example with Next.js Pages Router
+# Datadog RUM and @vercel/microfrontends Next.js Module Federation
 
-An official Vercel example demonstrating production-ready Module Federation microfrontend architecture using Webpack's Module Federation technology.
+This repo demonstrates how to combine Datadog RUM with Vercel's official Module Federation microfrontend application demo. This is a fork of Vercel's original repo, which you can find [here](https://github.com/vercel-labs/microfrontends-nextjs-pages-federation).
 
-This comprehensive example showcases how to build and deploy a Module Federation microfrontend application using [@vercel/microfrontends](https://vercel.com/docs/microfrontends) with [Module Federation](https://module-federation.io) and [Next.js Pages Router](https://nextjs.org/docs/pages/getting-started). Learn how to architect independent, deployable frontend applications that share code at runtime while maintaining team autonomy and deployment independence.
+There are multiple strategies you could use to tie RUM events in Datadog to a particular microfrontend within your application. One approach is to [pass a custom name and service to startView()](https://docs.datadoghq.com/real_user_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names). Another option is to [override each event's service individually using beforeSend()](https://docs.datadoghq.com/real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event). This repo demonstrates a `beforeSend()`-based approach.
+
+You'll find the sample integration code in the `useDatadogRUM()` function in [apps/root/pages/index.tsx](./apps/root/pages/index.tsx). In the real world, your routing setup will be much more complex, but the core of the approach will remain the same: track the current service as the user switches between microfrontends, and use it to set `event.service` in your `beforeSend()` callback.
+
+The rest of this README.md file has been preserved from Vercel's original demo repo; it contains instructions for testing the application locally. To actually send data to Datadog, in addition to following the instructions below, you'll need to set `clientToken` and `applicationId` in the `DD_RUM.init()` call in [apps/root/pages/index.tsx](./apps/root/pages/index.tsx). Try clicking on the `Log In` button or the logo in the navigation header to switch between pages in the demo app; you'll observe that the service changes on all events.
 
 ## 🚀 Deploy to Vercel
 

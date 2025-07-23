@@ -9,6 +9,17 @@ declare module 'content/page' {
   export default function Page(): JSX.Element;
 }
 
+declare module 'login/app' {
+  // eslint-disable-next-line import/no-default-export
+  export default function App(props: {
+    Component: React.ComponentType<Record<string, unknown>>;
+  }): JSX.Element;
+}
+declare module 'login/page' {
+  // eslint-disable-next-line import/no-default-export
+  export default function Page(): JSX.Element;
+}
+
 declare module 'navigation/app' {
   // eslint-disable-next-line import/no-default-export
   export default function App(props: {

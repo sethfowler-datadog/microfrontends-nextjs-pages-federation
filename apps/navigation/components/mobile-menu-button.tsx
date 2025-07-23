@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { MobileMenu } from './mobile-menu';
+import { useRouter } from 'next/router';
 
 export function MobileMenuButton(): React.JSX.Element {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -10,6 +12,9 @@ export function MobileMenuButton(): React.JSX.Element {
         <button
           className="remote:inline-flex remote:h-9 remote:items-center remote:justify-center remote:rounded-md remote:border remote:border-input remote:bg-background remote:px-4 remote:py-2 remote:text-sm remote:font-medium remote:shadow-sm remote:transition-colors remote:hover:bg-muted"
           type="button"
+          onClick={() => {
+            router.push('/?page=login', undefined, { shallow: true });
+          }}
         >
           Log in
         </button>
